@@ -1,7 +1,8 @@
 {
   "name": "free-pincode-api",
   "version": "1.0.0",
-  "scripts": {
-    "build": "echo 'No build required'"
+  "private": true,
+  "engines": {
+    "node": ">=18"
   }
 }
