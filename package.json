@@ -2,9 +2,6 @@
   "name": "free-pincode-api",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo 'No build step required'"
-  },
-  "dependencies": {
-    "india-pincode-lookup": "^1.0.3"
+    "build": "echo 'No build required'"
   }
 }
