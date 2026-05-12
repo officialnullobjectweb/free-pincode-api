@@ -1,4 +1,15 @@
+const API_URL = 'https://api.postalpincode.in/pincode';
+
 export default async function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   const { pincode } = req.query;
 
   if (!pincode || pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
@@ -6,8 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Using India Post Pincode API (free, no authentication)
-    const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+    const response = await fetch(`${API_URL}/${pincode}`);
     const data = await response.json();
 
     if (data && data[0] && data[0].Status === 'Success' && data[0].PostOffice) {
