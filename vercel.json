@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/lookup.js": {
-      "runtime": "nodejs"
-    }
-  }
-}

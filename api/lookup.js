@@ -1,23 +1,20 @@
-const API_URL = 'https://api.postalpincode.in/pincode';
-
-export default async function handler(req, res) {
-  // Enable CORS
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
-  const { pincode } = req.query;
+  const pincode = req.query.pincode;
 
   if (!pincode || pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
     return res.status(400).json({ error: 'Provide a valid 6-digit pincode' });
   }
 
   try {
-    const response = await fetch(`${API_URL}/${pincode}`);
+    const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
     const data = await response.json();
 
     if (data && data[0] && data[0].Status === 'Success' && data[0].PostOffice) {
@@ -43,4 +40,4 @@ export default async function handler(req, res) {
     console.error('API Error:', error);
     return res.status(500).json({ error: 'Failed to fetch pincode data' });
   }
-}
+};
