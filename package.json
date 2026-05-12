@@ -1,0 +1,7 @@
+{
+  "name": "free-pincode-api",
+  "version": "1.0.0",
+  "dependencies": {
+    "india-pincode-lookup": "^1.0.3"
+  }
+}
