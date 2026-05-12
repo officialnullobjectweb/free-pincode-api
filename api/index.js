@@ -1,4 +1,4 @@
-export default function handler(req, res) {
+module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -7,7 +7,7 @@ export default function handler(req, res) {
     return res.status(200).end();
   }
 
-  const { pincode } = req.query;
+  const pincode = req.query.pincode;
 
   if (!pincode || pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
     return res.status(400).json({ error: 'Provide a valid 6-digit pincode' });
@@ -39,4 +39,4 @@ export default function handler(req, res) {
       console.error('API Error:', error);
       return res.status(500).json({ error: 'Failed to fetch pincode data' });
     });
-}
+};
